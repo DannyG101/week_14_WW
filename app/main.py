@@ -44,5 +44,5 @@ def upload_file(file: UploadFile = File(...)):
     return {"status": "success", "inserted_records": len(dict_df)}
 
 
-uvicorn.run(app)
+
 
