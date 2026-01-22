@@ -2,8 +2,17 @@ from fastapi import FastAPI, File, UploadFile
 from db import DBConnect
 import pandas as pd
 import uvicorn
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+
+HOST = os.getenv("HOST")
+
 
 app = FastAPI()
+
 
 
 def add_risk_level(df):
@@ -21,7 +30,7 @@ def upload_file(file: UploadFile = File(...)):
     df = add_risk_level(df)
     df = replace_nan(df)
     dict_df = df.to_dict("records")
-    db = DBConnect("localhost", "root", "")
+    db = DBConnect(HOST, "root", "")
     db.connect()
     db.create_db("test5")
     db.create_table("weapons5")
