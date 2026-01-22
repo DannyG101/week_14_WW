@@ -32,7 +32,8 @@ def upload_file(file: UploadFile = File(...)):
                              weapon["year_estimated"], weapon["risk_level"])
     db.close_connection()
     file.file.close()
-    return dict_df
+    return {"status": "success", "inserted_records": len(dict_df)}
 
 
 uvicorn.run(app)
+
